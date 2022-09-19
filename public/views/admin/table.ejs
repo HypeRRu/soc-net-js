@@ -15,8 +15,34 @@
 		  	<% for (let row of rows) { %>
 		  		<tr>
 			  	<% for (let header of headers) { %>
-					<td>
-						<%= row[header.name] %>
+			  		<td>
+		  				<% switch ( header.type ) {
+							case "text":
+							case "email":
+						%>
+								<%= row[header.name] %>
+						<%		break;
+							case "date": %>
+								<%= row[header.name] %>
+						<%		break;
+							case "image": %>
+								<% if (row[header.name] != "null") { %>
+									<img src="<%= row[header.name] %>" alt="Image" width="64" height="64">
+								<% } else { %>
+									Не задано
+								<% } %>
+						<%		break;
+							case "select": %>
+								<% for (let option of header.options) { %>
+									<%= row[header.name] == option.value ? option.label : "" %>
+								<% } %>
+						<%		break;
+							case "link": %>
+							<a class="link-primary" href="<%= row[header.name].href %>">
+								<%- row[header.name].label %>
+							</a>
+						<%		break; 
+						} %>
 					</td>
 				<% } %>
 				</tr>

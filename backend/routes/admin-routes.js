@@ -3,53 +3,31 @@ import admin_controller from "../controllers/admin-controller.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-	const sidebar = admin_controller.get_sidebar();
-	const navbar  = admin_controller.get_navbar();
-
-	sidebar.elements[0].active = true;
-	navbar.elements[0].active = true;
-
-	res.render(
-		"admin/index",
-		{
-			navbar : navbar,
-			sidebar: sidebar,
-			headers: admin_controller.get_user_header(),
-			content: admin_controller.get_users()
-		}
-	);
+	admin_controller.render_all_records("users", req, res);
 });
 
 router.get("/messages", (req, res) => {
-	const sidebar = admin_controller.get_sidebar();
-	const navbar  = admin_controller.get_navbar();
-
-	sidebar.elements[1].active = true;
-	navbar.elements[1].active = true;
-
-	res.render(
-		"admin/index",
-		{
-			navbar : navbar,
-			sidebar: sidebar,
-		}
-	);
+	admin_controller.render_all_records("messages", req, res);
 });
 
 router.get("/feed", (req, res) => {
-	const sidebar = admin_controller.get_sidebar();
-	const navbar  = admin_controller.get_navbar();
+	admin_controller.render_all_records("feed", req, res);
+});
 
-	sidebar.elements[2].active = true;
-	navbar.elements[2].active = true;
+router.get("/user/create", (req, res) => {
+	admin_controller.render_one_record("users", req, res);
+});
 
-	res.render(
-		"admin/index",
-		{
-			navbar : navbar,
-			sidebar: sidebar,
-		}
-	);
+router.get("/user/:id", (req, res) => {
+	admin_controller.render_one_record("users", req, res);
+});
+
+router.get("/message/:id", (req, res) => {
+	admin_controller.render_one_record("messages", req, res);
+});
+
+router.get("/post/:id", (req, res) => {
+	admin_controller.render_one_record("feed", req, res);
 });
 
 /* not found page */

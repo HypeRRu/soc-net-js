@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<%- include("../common/head.ejs"); %>
-	<title>Admin page</title>
+	<title>Admin page - Edit user</title>
 </head>
 <body class="d-flex flex-column vh-100">
 	<%- include(
@@ -18,10 +18,10 @@
 				locals.sidebar
 			); %>
 			<%- include(
-				"table.ejs",
+				"edit-table.ejs",
 				{
 					headers: locals.headers,
-					rows: locals.content
+					record: locals.content
 				}
 			); %>
 		</div>

@@ -1,0 +1,52 @@
+<% if (!locals.headers) return; %>
+<div class="table-responsive col d-flex align-items-center">
+	<form id="edit" class="w-100">
+		<table class="table table-bordered table-striped table-sm">
+			<tbody>
+				<% for (let header of headers) { %>
+					<tr>
+						<th class="col-4">
+							<%= header.label %>
+						</th>
+						<td>
+							<% switch ( header.type ) {
+								case "text": %>
+									<input 
+										name="<%= header.name %>" 
+										type="text" 
+										class="<%= header.readonly ? `form-control-plaintext` : `form-control` %>" 
+										value="<%= record[header.name] %>"
+										<%= header.readonly ? `readonly` : `` %>
+									>
+							<%		break;
+								case "date": %>
+									<input name="<%= header.name %>" type="date" class="form-control" value="<%= record[header.name] %>">
+							<%		break;
+								case "email": %>
+									<input name="<%= header.name %>" type="email" class="form-control" value="<%= record[header.name] %>">
+							<%		break;
+								case "image": %>
+									<% if (record[header.name] != "null") { %>
+										<img src="<%= record[header.name] %>" alt="Image" width="128" height="128">
+									<% } else { %>
+										Не задано
+									<% } %>
+									<input name="<%= header.name %>" type="hidden" value="<%= record[header.name] %>">
+							<%		break;
+								case "select": %>
+									<select name="<%= header.name %>" class="form-select">
+									<% for (let option of header.options) { %>
+										<option value="<%= option.value %>" <%= record[header.name] == option.value ? `selected` : `` %>>
+											<%= option.label %>
+										</option>
+									<% } %>
+									</select>
+							<%		break; 
+							} %>
+						</td>
+					</tr>
+				<% } %>
+			</tbody>
+		</table>
+	</form>
+</div>
