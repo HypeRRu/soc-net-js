@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html class="h-100" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<%- include("../common/head.ejs"); %>
+	<title>Admin page</title>
+</head>
+<body class="d-flex flex-column vh-100">
+	<%- include(
+		"../common/navbar.ejs",
+		locals.navbar
+	); %>
+	<main class="container-lg">
+		<div class="row py-5">
+			<%- include(
+				"sidebar.ejs",
+				locals.sidebar
+			); %>
+			<%- include(
+				"table.ejs",
+				{
+					headers: locals.headers,
+					rows: locals.content?.data
+				}
+			); %>
+		</div>
+	</main>
+	<%- include("../common/footer.ejs"); %>
+</body>
+</html>

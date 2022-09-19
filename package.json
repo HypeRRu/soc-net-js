@@ -25,6 +25,8 @@
   },
   "homepage": "https://github.com/HypeRRu/soc-net-js#readme",
   "dependencies": {
+    "bootstrap": "^5.2.1",
+    "ejs": "^3.1.8",
     "express": "^4.18.1",
     "https": "^1.0.0",
     "jquery": "^3.6.1",
